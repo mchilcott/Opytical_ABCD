@@ -16,6 +16,8 @@ style = ['r', 'b', 'g'].__iter__()
 fig = [1,2,3].__iter__()
 
 
+plt.figure()
+
 for x in [-0.05, 0, 0.05]:
     s = style.next()
     plt.subplot(3, 1, fig.next())
@@ -26,5 +28,44 @@ for x in [-0.05, 0, 0.05]:
         plt.plot(ray[:,1], ray[:,0], s)
 
     plt.ylim((-0.5, 0.5))
+
+
+
+##################
+# Astigmatic beam feedback
+count = 0
+for col_len in np.linspace(4,12,100):
     
-plt.show()
+    q = OpticalPath()
+    
+    q.addElement(FreeSpace(col_len))
+    q.addElement(ThinLens(10))
+    q.addElement(FreeSpace(30))
+    q.addElement(ThinLens(10))
+    q.addElement(FreeSpace(col_len))
+    
+    
+    fast = 0.1
+    slow = 0.3
+    theta = 0.1
+    
+    plt.figure()
+    
+    ray = q.trace(np.matrix([[fast], [theta*3]]))
+    plt.plot(ray[:,1], ray[:,0], 'r-.' )
+    
+    ray = q.trace(np.matrix([[-fast], [-theta*3]]))
+    plt.plot(ray[:,1], ray[:,0], 'r-.')
+    
+    ray = q.trace(np.matrix([[slow], [theta]]))
+    plt.plot(ray[:,1], ray[:,0], 'r')
+    
+    ray = q.trace(np.matrix([[-slow], [-theta]]))
+    plt.plot(ray[:,1], ray[:,0], 'r')
+
+    plt.ylim((-4, 4))
+    
+    plt.title("Astigmatic external cavity")
+    plt.savefig(str(count) + ".png")
+    count += 1
+#plt.show()
