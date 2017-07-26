@@ -2,11 +2,9 @@ import numpy as np
 
 class OpticalPath:
     """A series of optical elements"""
-
-    elements = []
     
     def __init__ (self):
-        elements = []
+        self.elements = []
 
     def addElement(self, elem):
         self.elements.append(elem)

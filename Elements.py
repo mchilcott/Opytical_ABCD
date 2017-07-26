@@ -21,9 +21,6 @@ class FreeSpace (OpElement):
     Propagation through free space.
     """
 
-    """Length of space"""
-    l = 0
-    
     def __init__ (self, length):
         """Free space of given length
         """
@@ -44,10 +41,6 @@ class FreeSpace (OpElement):
 class SphericalInterface (OpElement):
     """A spherical dielectric interface
     """
-
-    n_1 = 1
-    n_2 = 1.5
-    radius = 10
 
     def __init__(self, radius, n_1 = 1, n_2 = 1.5):
         """A dieletric interface from refractive index n_1 to n_2 with a
@@ -78,9 +71,6 @@ class SphericalInterface (OpElement):
 class PlaneInterface (OpElement):
     """A Plane dielectric interface
     """
-
-    n_1 = 1.5
-    n_2 = 1.5
     
     def __init__ (self, n_1=1.0, n_2=1.3):
         """A plane interface from refractive index n_1 to n_2
@@ -114,8 +104,6 @@ class ThinLens (OpElement):
     (negative focal length for diverging lens
     """
 
-    f = 1.0
-
     def __init__ (self, f=1.0):
         """Create a thin lens with the given focal length
         """
@@ -137,10 +125,6 @@ class ThinLens (OpElement):
 
 
 class DielectricSlab (OpElement):
-
-    n_1 = 1.0
-    n_2 = 1.5
-    l = 0
 
     def __init__ (self, n_1, n_2, length):
         self.n_1 = n_1
